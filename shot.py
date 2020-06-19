@@ -1,4 +1,4 @@
-import random, pygame, sys
+import random, pygame, sys, time
 from pygame.locals import *
 
 def main():
@@ -8,7 +8,9 @@ def main():
     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
 
     mousex = 0 
-    mousey = 0 
+    mousey = 0
+    t1 = time.time()
+    my_font = pygame.font.SysFont(None, 30)
     pygame.display.set_caption('Memory Game')
 
     mainBoard = getRandomizedBoard()
@@ -74,8 +76,12 @@ def main():
                     firstSelection = None 
 
         
+        t2 = time.time()
+        text_surface = my_font.render('time: {}'.format(str(round(t2-t1, 2))), True, (0, 0, 0))
+        DISPLAYSURF.blit(text_surface, (10, 0))
         pygame.display.update()
         FPSCLOCK.tick(FPS)
+        
 
 
 def generateRevealedBoxesData(val):
@@ -292,3 +298,5 @@ ALLCOLORS = (RED, GREEN, BLUE, YELLOW, ORANGE, PURPLE, CYAN)
 ALLSHAPES = (SQUARE, DIAMOND)
 assert len(ALLCOLORS) * len(ALLSHAPES) * 2 >= BOARDWIDTH * BOARDHEIGHT, "Board is too big for the number of shapes/colors defined."
 main()
+print('time elapsed: ' + str(round(t2-t1, 2)) + ' seconds')
+print('time elapsed: ' + str(t2-t1) + ' seconds')
