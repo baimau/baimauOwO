@@ -9,7 +9,6 @@ def main():
 
     mousex = 0 
     mousey = 0
-    t1 = time.time()
     my_font = pygame.font.SysFont(None, 30)
     pygame.display.set_caption('Memory Game')
 
@@ -21,11 +20,16 @@ def main():
     DISPLAYSURF.fill(BGCOLOR)
     startGameAnimation(mainBoard)
 
-    while True: 
+    t1 = time.time()
+    while True:
         mouseClicked = False
 
+        t2 = time.time()
+        text_surface = my_font.render('time: {}'.format(str(round(t2-t1, 2))), True, (0, 0, 0))
+        DISPLAYSURF.blit(text_surface, (10, 0))
         DISPLAYSURF.fill(BGCOLOR) 
         drawBoard(mainBoard, revealedBoxes)
+        
 
         for event in pygame.event.get(): 
             if event.type == QUIT or (event.type == KEYUP and event.key == K_ESCAPE):
