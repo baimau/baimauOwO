@@ -2,7 +2,7 @@ import random, pygame, sys, time
 from pygame.locals import *
 
 def main():
-    global FPSCLOCK, DISPLAYSURF, my_font, t1 , t2
+    global FPSCLOCK, DISPLAYSURF, my_font, t1, t2
     pygame.init()
     FPSCLOCK = pygame.time.Clock()
     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
@@ -172,6 +172,8 @@ def drawBoxCovers(board, boxes, coverage):
         drawIcon(shape, color, box[0], box[1])
         if coverage > 0: 
             pygame.draw.rect(DISPLAYSURF, BOXCOLOR, (left, top, coverage, BOXSIZE))
+    text_surface = my_font.render('time: {}'.format(str(round(t2-t1, 2))), True, (0, 0, 0))
+    DISPLAYSURF.blit(text_surface, (10, 0))
     pygame.display.update()
     FPSCLOCK.tick(FPS)
 
