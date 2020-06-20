@@ -2,7 +2,7 @@ import random, pygame, sys, time
 from pygame.locals import *
 
 def main():
-    global FPSCLOCK, DISPLAYSURF
+    global FPSCLOCK, DISPLAYSURF, my_font, t1 , t2
     pygame.init()
     FPSCLOCK = pygame.time.Clock()
     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
@@ -77,6 +77,7 @@ def main():
 
                         
                         startGameAnimation(mainBoard)
+                        t1 = time.time()
                     firstSelection = None 
 
         
@@ -231,6 +232,8 @@ def gameWonAnimation(board):
     for i in range(13):
         color1, color2 = color2, color1 
         DISPLAYSURF.fill(color1)
+        text_surface = my_font.render('time: {}'.format(str(round(t2-t1, 2))), True, (0, 0, 0))
+        DISPLAYSURF.blit(text_surface, (10, 0))
         drawBoard(board, coveredBoxes)
         pygame.display.update()
         pygame.time.wait(300)
