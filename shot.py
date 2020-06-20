@@ -60,6 +60,8 @@ def main():
                         
                         pygame.time.wait(1000) 
                         coverBoxesAnimation(mainBoard, [(firstSelection[0], firstSelection[1]), (boxx, boxy)])
+                        text_surface = my_font.render('time: {}'.format(str(round(t2-t1, 2))), True, (0, 0, 0))
+                        DISPLAYSURF.blit(text_surface, (10, 0))
                         revealedBoxes[firstSelection[0]][firstSelection[1]] = False
                         revealedBoxes[boxx][boxy] = False
                     elif hasWon(revealedBoxes): 
@@ -172,8 +174,7 @@ def drawBoxCovers(board, boxes, coverage):
         drawIcon(shape, color, box[0], box[1])
         if coverage > 0: 
             pygame.draw.rect(DISPLAYSURF, BOXCOLOR, (left, top, coverage, BOXSIZE))
-    text_surface = my_font.render('time: {}'.format(str(round(t2-t1, 2))), True, (0, 0, 0))
-    DISPLAYSURF.blit(text_surface, (10, 0))
+    
     pygame.display.update()
     FPSCLOCK.tick(FPS)
 
